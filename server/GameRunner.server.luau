@@ -99,6 +99,12 @@ end
 
 print("[GameRunner] Bootstrapping event-driven 3v3 combat simulation...")
 
+local Players = game:GetService("Players")
+if #Players:GetPlayers() == 0 then
+	Players.PlayerAdded:Wait()
+end
+task.wait(1) -- Extra buffer to ensure LocalScripts have fully connected their events
+
 local match = MatchManager.new(teamA, teamB)
 match:InitializeTimeline()
 
