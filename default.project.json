@@ -1,5 +1,5 @@
 {
-  "name": "A-Tactical-Anime-RPG",
+  "name": "kaiko",
   "tree": {
     "$className": "DataModel",
     "ReplicatedStorage": {
@@ -13,9 +13,6 @@
     "ServerScriptService": {
       "Server": {
         "$path": "server"
-      },
-      "ServerPackages": {
-        "$path": "ServerPackages"
       }
     },
     "StarterPlayer": {
