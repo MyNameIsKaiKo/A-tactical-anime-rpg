@@ -106,6 +106,8 @@ end
 task.wait(1) -- Extra buffer to ensure LocalScripts have fully connected their events
 
 local match = MatchManager.new(teamA, teamB)
+print("Attente du client...")
+task.wait(3)
 match:InitializeTimeline()
 
 task.spawn(function()

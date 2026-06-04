@@ -1,26 +1,29 @@
 --!strict
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Fusion = require(ReplicatedStorage.Packages.Fusion)
+local Packages = ReplicatedStorage:WaitForChild("Packages")
+local Fusion = require(Packages:WaitForChild("Fusion"))
 local ActionBar = require(script.Parent.ActionBar)
 
-local New = Fusion.New
 local Children = Fusion.Children
 
 type Props = {
-	IsMyTurn: Fusion.StateObject<boolean>,
-	ActiveSpells: Fusion.StateObject<{any}>,
+	IsMyTurn: any,
+	ActiveSpells: any,
 	OnActionSelected: (spellId: string) -> ()
 }
 
 local function CombatApp(props: Props)
-	return New "ScreenGui" {
+	-- Scope local au composant
+	local scope = Fusion.scoped(Fusion)
+
+	-- On utilise scope:New au lieu de Fusion.New
+	return scope:New "ScreenGui" {
 		Name = "CombatUI",
 		ResetOnSpawn = false,
-		-- L'interface ne s'affiche que si c'est ton tour !
 		Enabled = props.IsMyTurn,
 
 		[Children] = {
-			New "Frame" {
+			scope:New "Frame" {
 				Name = "BottomContainer",
 				Size = UDim2.new(1, 0, 0, 120),
 				Position = UDim2.new(0, 0, 1, 0),
